@@ -1,0 +1,91 @@
+<form (ngSubmit)="onSubmit(starwarsForm);" #contactForm="ngForm">
+    <div *ngIf="paso1">
+        <h1>Primer Paso: TRASFONDO</h1>
+        <div>
+            <li>ORIGEN </li>
+            <li>
+                <select name="trasfondo" (change)="setOption($event.target)">
+                    <!-- {{trasfondos}} -->
+                    <option value="0"></option>
+                    <option *ngFor="let t of trasfondos" value={{t}}>
+                        {{t}}
+                    </option>
+                </select>
+        
+            </li>
+        </div>
+        <div>
+            <li>MOTIVACIONES </li>
+            <li>
+                <select name="motivacion" (change)="setOption($event.target)">
+                    <!-- {{motivaciones}} -->
+                    <option value="0"></option>
+                    <option *ngFor="let m of motivaciones" value={{m}}>
+                        {{m}}
+                    </option>
+                </select>
+            </li>
+        </div>
+    </div>   
+    <div *ngIf="paso2">
+        <h1>Segundo Paso: OBLIGACIONES</h1>
+        <div>
+            <li>OBLIGACION </li>
+            <li>
+                <input type="text" name="obligacion" (change)="setObligacion($event.target.value)">
+            </li>
+            <li *ngIf = "resultadoObligacion">
+                {{resultadoObligacion}}
+            </li>
+        </div>
+        <div>
+            <li>VALOR </li>
+            <li>
+                <input type="text" name="obligacion" (change)="setObligacion($event.target.value)">
+            <!-- TODO: VERIFCIAR FUNCION -->
+            </li>
+        </div>
+    </div>
+    <div *ngIf="paso3">
+        <h1>Tercer Paso: ESPECIE</h1>
+        <div>
+            <li>ESPECIE </li>
+            <li>
+                <select name="especie" (change)="setOption($event.target)">
+                    <!-- {{especies}} -->
+                    <option value="0"></option>
+                    <option *ngFor="let e of especies" value={{e}}>
+                        {{e}}
+                    </option>
+                </select>
+            </li>
+        </div>
+    </div>
+    <div *ngIf="paso4">
+        <h1>Cuarto Paso: OFICIO Y ESPECIALIZACIÓN</h1>
+        <div>
+            <li>OFICIO </li>
+            <li>
+                <select name="oficio" (change)="changeOficio($event.target)">
+                    {{oficios}}
+                    <option value="0"></option>
+                    <option *ngFor="let o of oficios" value={{o.name}}>
+                        {{o.name}}
+                    </option>
+                </select>
+            </li>
+        </div>
+        <div *ngIf = "especializaciones">
+            <li>ESPECIALIZACIÓN </li>
+            <li>
+                <select name="especializacion" (change)="setOption($event.target)">
+                    {{especializacion}}
+                    <option value="0"></option>
+                    <option *ngFor="let e of especializaciones" value={{e}}>
+                        {{e}}
+                    </option>
+                </select>
+            </li>
+        </div>
+    </div>        
+ </form>
