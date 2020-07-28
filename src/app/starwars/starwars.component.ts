@@ -12,6 +12,8 @@ const Personaje = [];
 
 export class StarwarsComponent implements OnInit {
 
+  public generadorTiradas: boolean;
+
   // TODO: Crear modelo
   public personaje = {
     tasfondo: '',
@@ -33,15 +35,17 @@ export class StarwarsComponent implements OnInit {
   public paso3 = true;
   public paso4 = true;
 
+  public dosObligaciones: boolean = false;
   public trasfondos: Array<string>;
   public motivaciones: Array<string>;
   public especies: Array<string>;
   public oficios: Array<any>;
   public especializaciones: Array<string>;
   public listaAtributos: Array<string>;
-  public resultadoObligacion: String;
+  public resultadoObligacion: string;
 
-  constructor() { 
+  constructor() {
+    this.generadorTiradas = false;
   }
 
   ngOnInit() {
@@ -50,80 +54,107 @@ export class StarwarsComponent implements OnInit {
     this.motivaciones = constants.Motivaciones;
     this.especies = constants.Especies;
     this.oficios = constants.Oficios;
-    
+
   }
 
   setOption(evento){
 
     Personaje.push({key: evento.name, value: evento.value })
-    switch(Personaje.length) {
-      case (2) :{
-        this.paso1 = false;
-        this.paso2 = true;
-        
-      }
-    }
-    
-    console.log(Personaje);
+    // switch(Personaje.length) {
+    //   case (2) :{
+    //     this.paso1 = false;
+    //     this.paso2 = true;
+
+    //   }
+    // }
+
   }
 
-  setObligacion(valor) {
-    let posicionLiteral;
-    const obligacion = (parseInt(valor))  
+  defineObligaciones(valor) {
+    const obligacion = (parseInt(valor))
+    if((obligacion === 0 || obligacion > 96) && !this.dosObligaciones) {
+      this.dosObligaciones = true;
+    } else {
+      this.resultadoObligacion = !this.resultadoObligacion?
+        constants.obligaciones[this.switchObligaciones(obligacion)]:
+        this.resultadoObligacion + ' y ' + constants.obligaciones[this.switchObligaciones(obligacion)];
+    }
+
+  // this.setObligacion(this.resultadoObligacion);
+    // Personaje.oblicacionInicial ? Personaje.oblicacionInicial = this.resultadoObligacion : this.personaje.push()
+  }
+
+  //TODO: Sugerencia de mejora. Usar Map.
+  switchObligaciones(obligacion) {
     switch(true) {
-      case ( obligacion > 0 && obligacion < 9 ): {
-        posicionLiteral = 0;
-        break;
+      case (obligacion < 9 ): {
+        return 0;
       }
       case ( obligacion < 17 ): {
-        posicionLiteral = 1;
-        break;
+        return 1;
       }
       case ( obligacion < 25 ): {
-        posicionLiteral = 2;
-        break;
+        return 2;
       }
       case ( obligacion < 33 ): {
-        posicionLiteral = 3;
-        break;
+        return 3;
       }
       case ( obligacion < 42 ): {
-        posicionLiteral = 4;
-        break;
+        return 4;
       }
       case ( obligacion < 49 ): {
-        posicionLiteral = 5;
-        break;
+        return 5;
       }
       case ( obligacion < 56 ): {
-        posicionLiteral = 6;
-        break;
+        return 6;
       }
       case ( obligacion < 65 ): {
-        posicionLiteral = 7;
-        break;
+        return 7;
       }
       case ( obligacion < 73 ): {
-        posicionLiteral = 8;
-        break;
+        return 8;
       }
       case ( obligacion < 81 ): {
-        posicionLiteral = 9;
-        break;
+        return 9;
       }
       case ( obligacion < 89 ): {
-        posicionLiteral = 10;
-        break;
+        return 10;
       }
-      case ( obligacion < 97 ): {
-        posicionLiteral = 11;
-        break;
+      default: {
+        return 11;
       }
-    }    
-    this.resultadoObligacion = constants.obligaciones[posicionLiteral];        
+    }
   }
 
+  // setObligacion(resultado) {
+  //   Personaje.find(p => {if (p.key === 'obligacion'){
+
+  //     p.value = resultado;
+  //     console.log('CASO SI', p);
+  //   } else {
+  //     Personaje.push({key: 'obligacion', value: resultado})
+  //     console.log('CASO NO',);
+
+  //   }});
+
+  // }
+
   changeOficio(evento) {
-    this.especializaciones = constants.Oficios.find(ofic => ofic.name === evento.value).espec;
+    this.especializaciones =  [];
+    const oficios = constants.Oficios.find(ofic => ofic.name === evento.value).espec;
+    oficios.forEach(ofi => this.especializaciones.push(ofi.value));
+  }
+
+  setEspecializacion(evento) {
+
+  }
+
+  onSubmit(starwars) {
+
+
+  }
+
+  generador() {
+    this.generadorTiradas = !this.generadorTiradas;
   }
 }

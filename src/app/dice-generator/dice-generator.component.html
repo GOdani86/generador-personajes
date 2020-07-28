@@ -1,0 +1,42 @@
+<ng-container>
+  <form name="tirada">
+    <ul>
+      <li>
+        <label for="capacidad">Capacidad</label>
+        <input name="capacidad" type="number" min="0" max="9" [(ngModel)] = "reservaDados.capacidad.cantidad">
+      </li>
+      <li>
+        <label for="pericia">Pericia</label>
+        <input name="pericia" type="number" min="0" max="9" [(ngModel)] = "reservaDados.pericia.cantidad">
+      </li>
+      <li>
+        <label for="beneficio">Beneficio</label>
+        <input name="beneficio" type="number" min="0" max="9" [(ngModel)] = "reservaDados.beneficio.cantidad">
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <label for="dificultad">Dificultad</label>
+        <input name="dificultad" type="number" min="0" max="9" [(ngModel)] = "reservaDados.dificultad.cantidad">
+      </li>
+      <li>
+        <label for="desafio">Desafío</label>
+        <input name="desafio" type="number" min="0" max="9" [(ngModel)] = "reservaDados.desafio.cantidad">
+      </li>
+      <li>
+        <label for="compilcaciones">Complicaciones</label>
+        <input name="complicaciones" type="number" min="0" max="9" [(ngModel)] = "reservaDados.complicaciones.cantidad">
+      </li>
+    </ul>
+    <button (click)=lanzaTirada()>Lanza dados</button>
+    <!-- <ng-container *ngIf="muestraResultados">
+      <div *ngFor = "let dados of reservaDados">
+        {{dados.resultado}}
+
+      </div>
+
+    </ng-container> -->
+
+  </form>
+
+</ng-container>

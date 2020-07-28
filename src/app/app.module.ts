@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { StarwarsComponent } from './starwars/starwars.component';
+import { DiceGeneratorComponent } from './dice-generator/dice-generator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StarwarsComponent
+    StarwarsComponent,
+    DiceGeneratorComponent
   ],
   imports: [
     BrowserModule,
